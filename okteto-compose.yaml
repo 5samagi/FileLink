@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  Worker:
+   Build) .
+   Environment:
+    - API_ID=${API_ID}
+    - API_HASH=${API_HASH}
+    - BOT_TOKEN=${BOT_TOKEN}
+    - APP_NAME=${APP_NAME}
+    - ARCHIVE_CHANNEL_ID=${ARCHIVE_CHANNEL_ID}
+    - Start_Message=${Start_Message}
+    - Bot_Channel_UserName=${Bot_Channel_UserName}
