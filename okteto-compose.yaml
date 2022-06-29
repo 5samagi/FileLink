@@ -1,8 +1,8 @@
 version: "3.8"
 services:
-  Worker:
-   Build: .
-   Environment:
+  worker:
+   build: .
+   environment:
     - API_ID=${API_ID}
     - API_HASH=${API_HASH}
     - BOT_TOKEN=${BOT_TOKEN}
