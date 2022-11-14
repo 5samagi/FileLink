@@ -87,7 +87,7 @@ async def wait(chat_id: int):
 
 @bot.on_message(filters.command("start"))
 async def start(_, msg: Message):
-    buttons = [[InlineKeyboardButton(Strings.dev_channel, url=f'https://t.me/{Config.Dev_Channel}')]]
+    buttons = [[InlineKeyboardButton(Strings.dev_channel, url=f'https://t.me/shadow_bots')]]
     if Config.Bot_Channel:
         buttons.append([InlineKeyboardButton(Strings.bot_channel, url=f'https://t.me/{Config.Bot_Channel}')])
     await msg.reply_text(Strings.start, reply_markup=InlineKeyboardMarkup(buttons))
@@ -99,11 +99,11 @@ async def keep_awake(sleep_time=20 * 60):
     So this function will send request every specific time.
     The time should be less than 30 minutes.
     """
-    while True:
-        async with ClientSession() as session:
-            async with session.get(Config.Link_Root + "keep_awake"):
-                pass
-        await sleep(sleep_time)
+    await sleep(sleep_time)
+    async with ClientSession() as session:
+        async with session.get(Config.Link_Root + "keep_awake"):
+            pass
+        
 
 
 async def startup():
@@ -120,5 +120,5 @@ if __name__ == '__main__':
     app_config = HypercornConfig()
     app_config._bind = [f'0.0.0.0:{Config.Port}']
     bot.loop.create_task(serve(app, app_config, shutdown_trigger=lambda: Future()))
-    bot.loop.create_task(keep_awake())
+    bot.loop.run_until_complete(keep_awake())
     idle()
